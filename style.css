@@ -1,0 +1,301 @@
+/* ===== リセット ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== ベース ===== */
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: linear-gradient(160deg, #FFD94A 0%, #FF8C00 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 560px;
+}
+
+/* ===== ヘッダー ===== */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-icon {
+  font-size: 3rem;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  color: #fff;
+  text-shadow: 2px 3px 0 rgba(0,0,0,0.2);
+  line-height: 1.4;
+  font-weight: bold;
+}
+
+.header-sub {
+  font-size: 2.2rem;
+  display: block;
+}
+
+/* ===== プログレス ===== */
+.progress-wrap {
+  margin-bottom: 14px;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.progress-bar {
+  background: rgba(255,255,255,0.35);
+  border-radius: 10px;
+  height: 12px;
+  overflow: hidden;
+}
+
+#progress-fill {
+  height: 100%;
+  background: #fff;
+  border-radius: 10px;
+  width: 0%;
+  transition: width 0.45s ease;
+}
+
+/* ===== カード ===== */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px 24px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+}
+
+/* ===== もんだい文 ===== */
+.question {
+  font-size: 1.2rem;
+  color: #2d2d2d;
+  line-height: 1.9;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+/* ===== 選択肢 ===== */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFF8DC;
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  padding: 13px 16px;
+  font-size: 1.05rem;
+  color: #333;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  line-height: 1.6;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+.option-btn:hover:not(:disabled) {
+  background: #FFE566;
+  border-color: #FFC107;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.option-label {
+  font-weight: bold;
+  color: #FF8C00;
+  min-width: 28px;
+  font-size: 1.1rem;
+}
+
+/* 正解 */
+.option-btn.correct {
+  background: #D4EDDA;
+  border-color: #28A745;
+  color: #155724;
+}
+.option-btn.correct .option-label {
+  color: #28A745;
+}
+
+/* 不正解（選んだもの） */
+.option-btn.incorrect {
+  background: #F8D7DA;
+  border-color: #DC3545;
+  color: #721C24;
+}
+.option-btn.incorrect .option-label {
+  color: #DC3545;
+}
+
+/* 正解の選択肢をハイライト（不正解時） */
+.option-btn.highlight {
+  background: #D4EDDA;
+  border-color: #28A745;
+  color: #155724;
+}
+.option-btn.highlight .option-label {
+  color: #28A745;
+}
+
+.option-btn:disabled {
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== フィードバック ===== */
+.feedback {
+  margin-top: 16px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.7;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.feedback.correct-fb {
+  background: #D4EDDA;
+  border: 2px solid #28A745;
+  color: #155724;
+}
+
+.feedback.incorrect-fb {
+  background: #F8D7DA;
+  border: 2px solid #DC3545;
+  color: #721C24;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== 次へボタン ===== */
+.btn-next {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  background: #FF6B35;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-next:hover {
+  background: #E55A2B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ===== けっか画面 ===== */
+#result-screen {
+  text-align: center;
+}
+
+.result-icon {
+  font-size: 5rem;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.result-heading {
+  font-size: 1.7rem;
+  color: #FF6B35;
+  margin-bottom: 20px;
+}
+
+.score-display {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.score-msg {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.btn-restart {
+  background: #FFD700;
+  color: #333;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+.btn-restart:hover {
+  background: #FFC200;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ===== ユーティリティ ===== */
+.hidden {
+  display: none !important;
+}
+
+/* ===== ルビ ===== */
+ruby rt {
+  font-size: 0.55em;
+  color: #888;
+}
+
+.option-btn.correct ruby rt,
+.option-btn.highlight ruby rt {
+  color: #2d7a3a;
+}
+
+.option-btn.incorrect ruby rt {
+  color: #9b3c3c;
+}
+
+/* ===== レスポンシブ ===== */
+@media (max-width: 420px) {
+  .header-title { font-size: 1.3rem; }
+  .header-sub   { font-size: 1.9rem; }
+  .question     { font-size: 1.05rem; }
+  .option-btn   { font-size: 0.95rem; padding: 11px 13px; }
+  .card         { padding: 22px 16px; }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>クレヨンしんちゃん クイズ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="header">
+      <div class="header-icon">🖍️</div>
+      <h1 class="header-title">
+        クレヨンしんちゃん<br>
+        <span class="header-sub">クイズ</span>
+      </h1>
+    </header>
+
+    <!-- クイズ画面 -->
+    <div id="quiz-screen">
+      <div class="progress-wrap">
+        <div class="progress-labels">
+          <span id="q-num"></span>
+          <span id="q-count"></span>
+        </div>
+        <div class="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <p id="question-text" class="question"></p>
+        <div id="options" class="options"></div>
+        <div id="feedback" class="feedback hidden"></div>
+        <button id="next-btn" class="btn-next hidden"></button>
+      </div>
+    </div>
+
+    <!-- けっか画面 -->
+    <div id="result-screen" class="card hidden">
+      <div id="result-icon" class="result-icon"></div>
+      <h2 class="result-heading">クイズ おわり！</h2>
+      <p id="score-display" class="score-display"></p>
+      <p id="score-msg" class="score-msg"></p>
+      <button id="restart-btn" class="btn-restart">
+        もういちど チャレンジ！
+      </button>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
