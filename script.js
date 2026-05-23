@@ -53,6 +53,28 @@ const questions = [
 
 const LABELS = ['Ａ', 'Ｂ', 'Ｃ', 'Ｄ'];
 
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function prepareQuestions() {
+  return shuffle(questions).map(q => {
+    const indexed = q.options.map((opt, i) => ({ opt, isCorrect: i === q.correct }));
+    const shuffled = shuffle(indexed);
+    return {
+      question: q.question,
+      options:  shuffled.map(x => x.opt),
+      correct:  shuffled.findIndex(x => x.isCorrect)
+    };
+  });
+}
+
+let activeQuestions = [];
 let currentIndex = 0;
 let score = 0;
 let answered = false;
@@ -72,6 +94,7 @@ const scoreMsg     = document.getElementById('score-msg');
 const restartBtn   = document.getElementById('restart-btn');
 
 function startQuiz() {
+  activeQuestions = prepareQuestions();
   currentIndex = 0;
   score = 0;
   quizScreen.classList.remove('hidden');
@@ -82,8 +105,8 @@ function startQuiz() {
 function showQuestion() {
   answered = false;
 
-  const q     = questions[currentIndex];
-  const total = questions.length;
+  const q     = activeQuestions[currentIndex];
+  const total = activeQuestions.length;
   const num   = currentIndex + 1;
 
   qNumEl.innerHTML  = `<ruby>第<rt>だい</rt></ruby>${num}<ruby>問<rt>もん</rt></ruby>`;
@@ -105,7 +128,7 @@ function showQuestion() {
   feedbackEl.innerHTML = '';
 
   nextBtn.classList.add('hidden');
-  nextBtn.textContent = currentIndex === questions.length - 1
+  nextBtn.textContent = currentIndex === activeQuestions.length - 1
     ? 'けっかを みる！'
     : 'つぎのもんだいへ →';
 }
@@ -114,7 +137,7 @@ function selectAnswer(selectedIndex) {
   if (answered) return;
   answered = true;
 
-  const q       = questions[currentIndex];
+  const q       = activeQuestions[currentIndex];
   const buttons = optionsEl.querySelectorAll('.option-btn');
 
   buttons.forEach(btn => (btn.disabled = true));
@@ -147,7 +170,7 @@ function showFeedback(isCorrect, correctOptionHTML) {
 
 function nextQuestion() {
   currentIndex++;
-  if (currentIndex >= questions.length) {
+  if (currentIndex >= activeQuestions.length) {
     showResult();
   } else {
     showQuestion();
@@ -160,7 +183,7 @@ function showResult() {
 
   progressFill.style.width = '100%';
 
-  const total = questions.length;
+  const total = activeQuestions.length;
   scoreDisplay.innerHTML =
     `${total}<ruby>問<rt>もん</rt></ruby>中 `
     + `${score}<ruby>問<rt>もん</rt></ruby> `
